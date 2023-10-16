@@ -1,7 +1,5 @@
 'use client';
 
-import React, { useState } from 'react';
-
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -9,6 +7,8 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import Modal from './Modal';
 import useAddTaskModal from '@/app/hooks/useAddTask';
 import { categories } from '@/app/lib/data';
+import { generateUniqueId, setTasksToLocalStorage } from '@/app/utils/storage';
+import useTaskStore from '@/app/hooks/useTaskStore';
 
 const schema = z.object({
   text: z.string().min(1, 'Required').min(3, 'minimum 3 letters'),
@@ -18,7 +18,8 @@ const schema = z.object({
 export type FormValuesType = z.infer<typeof schema>;
 
 const AddTaskModal = () => {
-  const [isLoading, setIsLoading] = useState(false)
+  const { tasks, setTasks } = useTaskStore();
+
   const { isOpen, onClose } = useAddTaskModal();
   const {
     register,
@@ -29,10 +30,22 @@ const AddTaskModal = () => {
     resolver: zodResolver(schema),
   });
 
-  const onSubmit: SubmitHandler<FormValuesType> = async (data) => {
-    console.log(data)
-    onClose()
+  const onSubmit: SubmitHandler<FormValuesType> = (data) => {
+
+    const taskObject = {
+      id: generateUniqueId(),
+      isCompleted: false,
+      ...data,
+    };
+
+    const newTasks = [...tasks, taskObject]
+
+    setTasks(newTasks)
+
+    setTasksToLocalStorage(newTasks);
     reset()
+    onClose()
+
   };
 
   const bodyContent = (
@@ -84,7 +97,7 @@ const AddTaskModal = () => {
               className='peer hidden'
               type="radio"
               value={option.value}
-              {...register("category")} // Register radio button
+              {...register("category")} 
             />
             <label htmlFor={option.value} className={`peer-checked:font-bold peer-checked:border-4  peer-checked:border-slate-700  peer-checked:bg-slate-200 flex flex-col items-center bg-slate-50 p-4 border rounded-md ${errors.category && 'border-red-400'}`}>
               <option.icon />
@@ -100,7 +113,7 @@ const AddTaskModal = () => {
 
   return (
     <Modal
-      disabled={isLoading}
+      disabled={false}
       isOpen={isOpen}
       title="New Task"
       actionLabel="Add"

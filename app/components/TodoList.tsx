@@ -1,10 +1,19 @@
 "use client"
 
-import { tasks } from '../lib/data';
+import { useEffect } from 'react';
 import AddTaskButton from './AddTaskButton';
 import TodoItem from './TodoItem';
+import { getTasksFromLocalStorage } from '../utils/storage';
+import useTaskStore from '../hooks/useTaskStore';
 
 const TodoList = () => {
+  const { tasks, setTasks } = useTaskStore();
+
+  useEffect(() => {
+    const storedTasks = getTasksFromLocalStorage();
+    setTasks(storedTasks);
+  }, []);
+
 
   return (
     <>
@@ -18,8 +27,6 @@ const TodoList = () => {
         ))}
       </ul>
     </>
-
-
   );
 };
 
