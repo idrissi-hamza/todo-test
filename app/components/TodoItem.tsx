@@ -1,6 +1,23 @@
+import useTaskStore from "../hooks/useTaskStore";
 import { Task } from "../lib/types"
+import { setTasksToLocalStorage } from "../utils/storage";
 
 const TodoItem = ({ task }: { task: Task }) => {
+
+  const { tasks, setTasks } = useTaskStore();
+
+  const toggleIsCompleted = (taskId: string) => {
+    const updatedTasks = tasks.map((t) => {
+      if (t.id === taskId) {
+        return { ...t, isCompleted: !t.isCompleted };
+      }
+      return t;
+    });
+
+    setTasks(updatedTasks);
+    setTasksToLocalStorage(updatedTasks)
+    console.log(taskId)
+  };
 
   return (
     <li
@@ -11,6 +28,7 @@ const TodoItem = ({ task }: { task: Task }) => {
         type='checkbox'
         defaultChecked={task.isCompleted}
         className='peer h-4 w-4 cursor-pointer rounded border-gray-300 text-slate-600 focus:ring-slate-600'
+        onChange={() => toggleIsCompleted(task.id)}
       />
       <label
         htmlFor={task.id}
