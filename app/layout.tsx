@@ -2,6 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Nunito } from 'next/font/google'
 import Navbar from './components/Navbar'
+import AddTaskModal from './components/modals/AddTaskModal'
 
 const inter = Nunito({ subsets: ['latin'] })
 
@@ -19,7 +20,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} bg-pattern `}>
         <Navbar />
-        {children}</body>
+        <AddTaskModal />
+        {children}
+      </body>
     </html>
   )
 }
