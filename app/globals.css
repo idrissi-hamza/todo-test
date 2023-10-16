@@ -1,3 +1,43 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/*  custom scrollbar  */
+html,
+body,
+:root {
+  --primary: inherent;
+  --secondary: rgba(139, 139, 148, 0.349);
+}
+
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--secondary) var(--primary);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--primary);
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--secondary);
+  border-radius: 14px;
+  border: 2px solid var(--primary);
+}
+
+
+.bg-pattern {
+  background-color: #ffffff;
+  opacity: 1;
+  background-image: radial-gradient(#d2d3efd7 0.85px, #f7f7fcd4 0.85px);
+  background-size: 40px 40px;
+}
