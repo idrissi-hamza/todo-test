@@ -1,43 +1,60 @@
 // mockedData.ts
-import { Category, Task } from './types';
+import { Task } from './types';
+import {
+  MdWorkOutline,
+  MdPersonOutline,
+  MdOutlineShoppingCart,
+} from 'react-icons/md';
 
 const tasks: Task[] = [
   {
     id: '1',
     text: 'task1',
     isCompleted: false,
-    category: Category.Shopping,
+    category: 'shopping',
   },
   {
     id: '2',
     text: 'task2',
     isCompleted: true,
-    category: Category.Work,
+    category: 'work',
   },
   {
     id: '3',
     text: 'task3',
     isCompleted: false,
-    category: Category.Personal,
+    category: 'personal',
   },
   {
-    id:' 4',
+    id: ' 4',
     text: 'task4',
     isCompleted: false,
-    category: Category.Personal,
+    category: 'personal',
   },
   {
     id: '5',
     text: 'task5',
     isCompleted: false,
-    category: Category.Personal,
-  }
+    category: 'personal',
+  },
 ];
 
-const categories: Category[] = [
-  Category.Work,
-  Category.Personal,
-  Category.Shopping,
+const categories = [
+  {
+    label: 'Work',
+    value: 'work',
+    icon: MdWorkOutline,
+  },
+  {
+    label: 'Personal',
+    value: 'personal',
+    icon: MdPersonOutline,
+  },
+  {
+    label: 'Shopping',
+    value: 'shopping',
+    icon: MdOutlineShoppingCart,
+  },
 ];
 
 export { tasks, categories };
