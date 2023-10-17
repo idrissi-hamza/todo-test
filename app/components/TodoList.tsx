@@ -10,6 +10,7 @@ import SearchTask from './SearchTask';
 import toast from 'react-hot-toast';
 import { MdOutlineClear } from 'react-icons/md';
 import Button from './Button';
+import CategoriesMenu from './CategoriesMenu';
 
 const TodoList = () => {
   const { tasks, setTasks } = useTaskStore();
@@ -58,6 +59,7 @@ const TodoList = () => {
       </div>
       <div className='mb-4 px-10 flex justify-start gap-2'>
         <SearchTask value={searchQuery} onChange={handleSearchChange} />
+        <CategoriesMenu />
         {searchQuery ?
           <Button
             onClick={handleReset}
