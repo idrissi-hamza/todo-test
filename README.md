@@ -1,6 +1,6 @@
 # Todos Application
 
-[![Vercel Deployment Status](https://manage-todos-beta.vercel.app/)](https://manage-todos-beta.vercel.app/)
+[Preview](https://manage-todos-beta.vercel.app/)](https://manage-todos-beta.vercel.app/)
 
 ## Description
 
