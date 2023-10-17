@@ -17,6 +17,8 @@ const TodoList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [filteredTasks, setFilteredTasks] = useState([...tasks]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,16 +40,27 @@ const TodoList = () => {
     setSearchQuery(value);
   };
 
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+
+  };
+
   useEffect(() => {
     const filtered = tasks.filter((task) =>
       task.text.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    setFilteredTasks(filtered);
-  }, [tasks, searchQuery]);
+    const filteredByCategory = selectedCategory
+      ? filtered.filter((task) => task.category === selectedCategory)
+      : filtered
+
+
+    setFilteredTasks(filteredByCategory);
+  }, [tasks, searchQuery, selectedCategory]);
 
   const handleReset = () => {
     setSearchQuery('');
+    setSelectedCategory('');
   };
 
 
@@ -55,12 +68,14 @@ const TodoList = () => {
     <>
       <div className='flex items-center justify-between  pt-6 pb-4 pl-10'>
         <h1 className="text-2xl font-bold ">Todo List</h1>
-        <AddTaskButton />
+        {!isLoading ? <AddTaskButton /> : null}
       </div>
       <div className='mb-4 px-10 flex justify-start gap-2'>
-        <SearchTask value={searchQuery} onChange={handleSearchChange} />
-        <CategoriesMenu />
-        {searchQuery ?
+        {!isLoading ? <>
+          <SearchTask value={searchQuery} onChange={handleSearchChange} />
+          <CategoriesMenu onCategoryChange={handleCategoryChange} selectedCategory={selectedCategory} />
+        </> : null}
+        {searchQuery || selectedCategory ?
           <Button
             onClick={handleReset}
             label='Reset'
