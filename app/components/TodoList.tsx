@@ -6,10 +6,14 @@ import TodoItem from './TodoItem';
 import { getTasksFromLocalStorage } from '../utils/storage';
 import useTaskStore from '../hooks/useTaskStore';
 import Skeleton from './Skeleton';
+import SearchTask from './SearchTask';
+import toast from 'react-hot-toast';
 
 const TodoList = () => {
   const { tasks, setTasks } = useTaskStore();
   const [isLoading, setIsLoading] = useState(true);
+  const [filteredTasks, setFilteredTasks] = useState([...tasks]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,7 +22,7 @@ const TodoList = () => {
         const storedTasks = await getTasksFromLocalStorage();
         setTasks(storedTasks);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        toast.error('Error fetching data');
       } finally {
         setIsLoading(false);
       }
@@ -27,18 +31,34 @@ const TodoList = () => {
     fetchData();
   }, []);
 
+  const handleSearchChange = (value: string) => {
+    setSearchQuery(value);
+  };
+
+  useEffect(() => {
+    const filtered = tasks.filter((task) =>
+      task.text.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    setFilteredTasks(filtered);
+  }, [tasks, searchQuery]);
+
+
 
   return (
     <>
-      <div className='flex items-center justify-between mb-6  py-6 pl-10'>
+      <div className='flex items-center justify-between  pt-6 pb-4 pl-10'>
         <h1 className="text-2xl font-bold ">Todo List</h1>
         <AddTaskButton />
+      </div>
+      <div className='mb-4 px-10'>
+        <SearchTask value={searchQuery} onChange={handleSearchChange} />
       </div>
       {isLoading ?
         <Skeleton />
         :
         <ul className="max-h-[70vh] overflow-y-scroll px-10">
-          {tasks.map((task) => (
+          {filteredTasks.map((task) => (
             <TodoItem key={task.id} task={task} />
           ))}
         </ul>}

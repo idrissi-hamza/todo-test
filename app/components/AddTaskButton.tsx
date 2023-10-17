@@ -9,7 +9,7 @@ const AddTaskButton = () => {
   const { onOpen } = useAddTaskModal();
 
   return (
-    <div className=' flex items-end justify-end pr-12 pt-4'>
+    <div className=' flex items-end justify-end pr-12'>
       <Button Icon={BiPlus} onClick={onOpen} rounded />
     </div>
   )
