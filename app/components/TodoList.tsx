@@ -67,11 +67,14 @@ const TodoList = () => {
   return (
     <>
       <div className='flex items-center justify-between  pt-6 pb-4 pl-10'>
-        <h1 className="text-2xl font-bold ">Todo List</h1>
+        <div>
+          <h1 className="text-2xl font-bold ">Welcome back</h1>
+          {tasks.length === 0 && !isLoading ? <p className='text-lgd font-semibold text-slate-600 pl-1 mt-2'>Add a new task</p> : null}
+        </div>
         {!isLoading ? <AddTaskButton /> : null}
       </div>
       <div className='mb-4 px-10 flex justify-start gap-2'>
-        {!isLoading ? <>
+        {!isLoading && tasks.length ? <>
           <SearchTask value={searchQuery} onChange={handleSearchChange} />
           <CategoriesMenu onCategoryChange={handleCategoryChange} selectedCategory={selectedCategory} />
         </> : null}

@@ -29,8 +29,8 @@ const Button = ({
   const buttonClasses = `
   flex items-center justify-center transition
   ${small ? 'py-1 px-3 gap-2 text-sm' : 'py-2 px-4 font-semibold border-2 w-full gap-4'}
-  ${ghost ? 'text-slate-900 hover:bg-gray-200/60' : 'text-white bg-slate-900 hover:opacity-90'}
-  ${outline ? 'bg-gray-50 hover:bg-gray-200/60 text-slate-900 border border-slate-700 border-dashed' : 'border-slate-900'}
+  ${ghost ? 'text-slate-900 hover:bg-gray-200/60' : 'text-white  hover:opacity-90 bg-slate-900'}
+  ${outline ? 'bg-gray-50 hover:bg-gray-200/60 text-slate-900  border border-slate-700 border-dashed' : 'border-slate-900'}
   ${rounded ? 'rounded-full aspect-square' : 'rounded-lg'}
   disabled:opacity-70 disabled:cursor-not-allowed
 `;

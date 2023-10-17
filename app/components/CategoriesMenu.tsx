@@ -6,25 +6,6 @@ import { AiOutlineMenu } from 'react-icons/ai';
 import Button from './Button';
 import { categories } from '../lib/data';
 
-
-// [
-//   {
-//     label: 'Work',
-//     value: 'work',
-//     icon: MdWorkOutline,
-//   },
-//   {
-//     label: 'Personal',
-//     value: 'personal',
-//     icon: MdPersonOutline,
-//   },
-//   {
-//     label: 'Shopping',
-//     value: 'shopping',
-//     icon: MdOutlineShoppingCart,
-//   },
-// ];
-
 interface CategoryFilterProps {
   onCategoryChange: (category: string) => void;
   selectedCategory: string
@@ -43,7 +24,7 @@ const CategoriesMenu = ({ onCategoryChange, selectedCategory }: CategoryFilterPr
 
   return (
     <>
-      <Button label='Category' Icon={getSelectedCategoryIcon(selectedCategory)} small outline onClick={toggleOpen} />
+      <Button label='Category' Icon={getSelectedCategoryIcon(selectedCategory)} small outline ghost onClick={toggleOpen} />
       <div className="relative ">
         {isOpen ? (
           <div className="absolute rounded-xl shadow-md bg-white overflow-hidden right-0 top-12 text-sm ">

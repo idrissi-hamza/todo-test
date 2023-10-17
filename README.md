@@ -1,10 +1,13 @@
-
 # Todos Application
 
+[![Vercel Deployment Status](https://manage-todos-beta.vercel.app/)](https://manage-todos-beta.vercel.app/)
+
 ## Description
-This is a simple task management application built with [React](https://reactjs.org/) and [Next.js](https://nextjs.org/). Users can add,  complete tasks, and manage them in different categories.
+
+This is a simple task management application built with [React](https://reactjs.org/) and [Next.js](https://nextjs.org/). Users can add, complete tasks, and manage them in different categories.
 
 ## Features
+
 - Add new tasks with categories
 - Toggle task completion status
 - Search tasks
@@ -12,6 +15,7 @@ This is a simple task management application built with [React](https://reactjs.
 - Copy task text to clipboard
 
 ## Technologies Used
+
 - React
 - Next.js
 - Zustand (for state management)
